@@ -1,11 +1,12 @@
 require('dotenv').config()
 const connectDatabase = require('./database/database')
 const express = require('express')
-const userRoutes = require('./routes/user')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const { PORT } = process.env
+const userRoutes = require('./routes/user')
+const activityRoutes = require('./routes/activities')
 
 const app = express()
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.use('/users', userRoutes)
+app.use('/activities', activityRoutes)
 
 app.use((req, res, next) => {
   const err = new Error('Not found')
