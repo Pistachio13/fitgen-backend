@@ -7,6 +7,8 @@ const cors = require('cors')
 const { PORT } = process.env
 const userRoutes = require('./routes/user')
 const activityRoutes = require('./routes/activities')
+const userInfoRoutes = require('./routes/userInfo')
+const checkAuth = require('./middleware/check-auth')
 
 const app = express()
 
@@ -19,7 +21,8 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.use('/users', userRoutes)
-app.use('/activities', activityRoutes)
+app.use('/userInfo', checkAuth, userInfoRoutes)
+app.use('/activities', checkAuth, activityRoutes)
 
 app.use((req, res, next) => {
   const err = new Error('Not found')
