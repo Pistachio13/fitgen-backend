@@ -115,7 +115,7 @@ const readUserInfo = (req, res, next) => {
     const id = req.params.userInfoId
     UserInfo
     .findById(id)
-    .select('_id name surName age gender weight height')
+    .select('_id userId name surName age gender weight height')
     .exec()
     .then(doc => {
         console.log("Find by id from database", doc)
@@ -142,6 +142,7 @@ const readUserInfo = (req, res, next) => {
 
 const addUserInfo = (req, res, next) => {
     const userInfo = new UserInfo({
+        userId: req.params.userId,
         name: req.body.name,
         surName: req.body.surName,
         age: req.body.age,
@@ -157,6 +158,7 @@ const addUserInfo = (req, res, next) => {
             message: "Added information successfully",
             addedUserInfo: {
                 _id: result._id,
+                userId: result.userId,
                 name: result.name,
                 surName: result.surName,
                 age: result.age,
@@ -180,7 +182,7 @@ const addUserInfo = (req, res, next) => {
 
 
 const updateUserInfo = (req, res, next) => {
-    const id = req.params.userInfoId;
+    const id = req.params.userInfoId
     UserInfo
     .findById(id)
     if (!id) {

@@ -3,10 +3,12 @@ const router = express.Router()
 const userController = require('../controllers/userController')
 const checkAuth = require('../middleware/check-auth')
 
-const {  addUserInfo, updateUserInfo } = userController
+const { readUserInfo, addUserInfo, updateUserInfo } = userController
 
-router.post('/:userInfoId/added', checkAuth, addUserInfo)
+router.get('/:userInfoId', checkAuth, readUserInfo)
 
-router.put('/:userInfoId/updated', checkAuth, updateUserInfo)
+router.post('/:userId/addInfo', checkAuth, addUserInfo)
+
+router.put('/:userInfoId/update', checkAuth, updateUserInfo)
 
 module.exports = router

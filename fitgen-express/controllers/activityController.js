@@ -5,7 +5,7 @@ const { PORT } = process.env
 const activitiesList = (req, res, next) => {
     Activity
     .find()
-    .select('_id activityType activityName duration date description')
+    .select('_id userId activityType activityName duration date description')
     .exec()
     .then(docs => {
         console.log(docs)
@@ -14,9 +14,12 @@ const activitiesList = (req, res, next) => {
             activities: docs.map(doc => {
                 return {
                     _id: doc._id,
+                    id: doc.id,
+                    userId: doc.userId,
                     activityType: doc.activityType,
                     activityName: doc.activityName,
-                    date: doc.date,
+                    startDate: doc.startDate,
+                    endDate: doc.endDate,
                     durationHour: doc.durationHour,
                     durationMin: doc.durationMin,
                     description: doc.description,
@@ -41,11 +44,13 @@ const activitiesList = (req, res, next) => {
 
 const addActivity = (req, res, next) => {
     const activity = new Activity({
+        userId: req.params.userId,
         activityType: req.body.activityType,
         activityName: req.body.activityName,
         durationHour: req.body.durationHour,
         durationMin: req.body.durationMin,
-        date: req.body.date,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
         description: req.body.description,
         isSuccess: req.body.isSuccess,
     })
@@ -57,9 +62,11 @@ const addActivity = (req, res, next) => {
             message: "Added activity successfully",
             addedActivity: {
                 _id: result._id,
+                userId: result.userId,
                 activityType: result.activityType,
                 activityName: result.activityName,
-                date: result.date,
+                startDate: result.startDate,
+                endDate: result.endDate,
                 duration: result.duration,
                 description: result.description,
                 isSuccess: result.isSuccess,
@@ -83,7 +90,7 @@ const oneActivity = (req, res, next) => {
     const id = req.params.activityId
     Activity
     .findById(id)
-    .select('_id activityType activityName duration date description')
+    .select('_id userId activityType activityName duration date description')
     .exec()
     .then(doc => {
         console.log("Find by id from database", doc)
@@ -124,7 +131,8 @@ const updateActivity = (req, res, next) => {
                 activityName: req.body.activityName,
                 durationHour: req.body.durationHour,
                 durationMin: req.body.durationMin,
-                date: req.body.date,
+                startDate: req.body.startDate,
+                endDate: req.body.endDate,
                 description: req.body.description,
                 isSuccess: req.body.isSuccess,
             }

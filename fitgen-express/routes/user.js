@@ -9,7 +9,7 @@ router.post('/signup', signup)
 
 router.post('/login', login)
 
-router.get('/logout', checkAuth, logout)
+router.get('/:userId/logout', checkAuth, logout)
 
 router.delete('/:userId', checkAuth, deleteUser)
 

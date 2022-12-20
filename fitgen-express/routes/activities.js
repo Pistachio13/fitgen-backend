@@ -5,11 +5,11 @@ const activityController = require('../controllers/activityController')
 
 const { activitiesList, addActivity, oneActivity, updateActivity, deleteActivity } = activityController
 
-router.get('/views', activitiesList)
+router.get('/', activitiesList)
 
-router.post('/create', addActivity)
+router.post('/:userId/create', addActivity)
 
-router.get("/:activityId/view", oneActivity)
+router.get("/:activityId", oneActivity)
 
 router.put("/:activityId/update", updateActivity)
 

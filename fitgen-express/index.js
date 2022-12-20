@@ -9,6 +9,7 @@ const userRoutes = require('./routes/user')
 const activityRoutes = require('./routes/activities')
 const userInfoRoutes = require('./routes/userInfo')
 const checkAuth = require('./middleware/check-auth')
+const cookieParser = require('cookie-parser')
 
 const app = express()
 
@@ -17,6 +18,7 @@ connectDatabase()
 app.use(morgan("dev"))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(cookieParser())
 
 app.use(cors())
 
