@@ -20,10 +20,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cookieParser())
 
+
 app.use(cors({
   // origin: 'https://jsd-fitgen-frontend.vercel.app', 
   credentials: true,
+  origin: "*",
 }));
+
 
 // app.use('/users', userRoutes)
 // app.use('/userInfo', checkAuth, userInfoRoutes)

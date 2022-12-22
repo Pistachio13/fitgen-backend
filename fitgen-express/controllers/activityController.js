@@ -31,11 +31,11 @@ const activitiesList = (req, res, next) => {
                 }
             })
         }
-        res.status(200).json(response)
+        return res.status(200).json(response)
     })
     .catch(err => {
         console.log(err)
-        res.status(500).json({
+        return res.status(500).json({
             error: err
         })
     })
@@ -58,7 +58,7 @@ const addActivity = async (req, res, next) => {
     .save()
     .then(result => {
         // console.log(result)
-        res.status(201).json({
+       return res.status(201).json({
             message: "Added activity successfully",
             addedActivity: {
                 _id: result._id,
@@ -79,7 +79,7 @@ const addActivity = async (req, res, next) => {
     })
     .catch(err => {
         console.log(err)
-        res.status(500).json({
+        return res.status(500).json({
             error: err
         })
     })
@@ -95,7 +95,7 @@ const oneActivity = (req, res, next) => {
     .then(doc => {
         console.log("Find by id from database", doc)
         if (doc) {
-          res.status(200).json({
+          return res.status(200).json({
               activity: doc,
               request: {
                   type: 'GET',
@@ -103,14 +103,14 @@ const oneActivity = (req, res, next) => {
               }
           })
         } else {
-          res
+          return res
             .status(404)
             .json({ message: "Invalid ID" })
         }
       })
       .catch(err => {
         console.log(err)
-        res.status(500).json({ error: err })
+        return res.status(500).json({ error: err })
       })
 }
 
@@ -140,7 +140,7 @@ const updateActivity = (req, res, next) => {
         .exec()
         .then(result => {
             console.log(result)
-            res.status(200).json({
+            return res.status(200).json({
                 message: 'Activity updated',
                 request: {
                     type: 'GET',
@@ -150,7 +150,7 @@ const updateActivity = (req, res, next) => {
         })
         .catch(err => {
             console.log(err);
-            res.status(500).json({
+            return res.status(500).json({
               error: err
             })
         })
@@ -164,7 +164,7 @@ const deleteActivity = (req, res, next) => {
       .exec()
       .then(result => {
         console.log(result)
-        res.status(200).json({
+        return res.status(200).json({
             message: 'Activity deleted',
             request: {
                 type: 'POST',
@@ -174,7 +174,7 @@ const deleteActivity = (req, res, next) => {
       })
       .catch(err => {
         console.log(err);
-        res.status(500).json({
+        return res.status(500).json({
           error: err
         });
     });
