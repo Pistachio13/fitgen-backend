@@ -22,7 +22,7 @@ app.use(cookieParser())
 
 app.use(cors({
   // origin: 'https://jsd-fitgen-frontend.vercel.app', 
-  credentials: true 
+  credentials: true,
 }));
 
 // app.use('/users', userRoutes)
