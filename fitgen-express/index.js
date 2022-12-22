@@ -20,11 +20,14 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cookieParser())
 
-app.use(cors())
+app.use(cors({
+  origin: 'https://jsd-3-project-nxe7.vercel.app', 
+  credentials: true 
+}));
 
-app.use('/users', userRoutes)
-app.use('/userInfo', checkAuth, userInfoRoutes)
-app.use('/activities', checkAuth, activityRoutes)
+// app.use('/users', userRoutes)
+// app.use('/userInfo', checkAuth, userInfoRoutes)
+app.use('/activities', activityRoutes)
 
 app.use((req, res, next) => {
   const err = new Error('Not found')
@@ -40,11 +43,8 @@ app.use((err, req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-  res.send({ message: 'Welcome to MongoDB' })
+  res.send({ message: 'Welcome to MongoDB', success: 'yes' })
 })
-
-
-
 
 app.listen(PORT, () => {
   console.log('Server is running at http://localhost:%d', PORT)

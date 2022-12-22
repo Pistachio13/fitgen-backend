@@ -7,7 +7,7 @@ const { activitiesList, addActivity, oneActivity, updateActivity, deleteActivity
 
 router.get('/', activitiesList)
 
-router.post('/:userId/create', addActivity)
+router.post('/create', addActivity)
 
 router.get("/:activityId", oneActivity)
 
