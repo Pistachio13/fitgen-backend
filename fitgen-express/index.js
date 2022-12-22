@@ -21,7 +21,7 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 
 app.use(cors({
-  origin: 'https://jsd-3-project-nxe7.vercel.app', 
+  origin: 'https://jsd-fitgen-frontend.vercel.app', 
   credentials: true 
 }));
 
